@@ -38,9 +38,11 @@ module_names.split(',').each do |module_name|
   Dir.chdir("puppet-#{module_name}") {
     `rm -rf .git`
     `git init`
-    `git remote add origin git@github.com:#{ENV['GITHUB_USERNAME']}/puppet-#{module_name}.git`
     `mkdir spec/classes`
     `touch spec/classes/#{module_name}_spec.rb`
+    `git add .`
+    `git commit -m "Initial repository layout"`
+    `git remote add origin git@github.com:#{ENV['GITHUB_USERNAME']}/puppet-#{module_name}.git`
     `git push origin master`
   }
 end
