@@ -40,7 +40,7 @@ module_names.split(',').each do |module_name|
     `git init`
     `mkdir spec/classes`
     `touch spec/classes/#{module_name}_spec.rb`
-    `git rm spec/fixtures/Puppetfile`
+    `rm spec/fixtures/Puppetfile`
     `git add .`
     `git commit -m "Initial repository layout"`
     `git remote add origin git@github.com:#{ENV['GITHUB_USERNAME']}/puppet-#{module_name}.git`
