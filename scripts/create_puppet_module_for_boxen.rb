@@ -38,7 +38,7 @@ module_names.split(',').each do |module_name|
   Dir.chdir("puppet-#{module_name}") {
     `rm -rf .git`
 
-    `sed '1,35d' README.md`
+    `sed -i '' '1,35d' README.md`
     `sed -i '' '3,8d' README.md`
     `sed -i '' '16d' README.md`
     `sed -i '' 's/template/#{module_name}/g' README.md`
