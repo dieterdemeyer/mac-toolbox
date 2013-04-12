@@ -37,14 +37,25 @@ module_names.split(',').each do |module_name|
   `git clone --depth 1 git://github.com/boxen/puppet-template.git puppet-#{module_name}`
   Dir.chdir("puppet-#{module_name}") {
     `rm -rf .git`
-    `mv spec/classes/template_spec.rb spec/classes/#{module_name}_spec.rb`
+
+    `sed '1,35d' README.md`
+    `sed -i '' '3,8d' README.md`
+    `sed -i '' '16d' README.md`
+    `sed -i '' 's/template/#{module_name}/g' README.md`
+
     `sed -i '' '1d' manifests/init.pp`
     `sed -i '' 's/template/#{module_name}/g' manifests/init.pp`
-    `sed -i '' 2,4d' spec/classes/#{module_name}_spec.rb`
+
+    `mv spec/classes/template_spec.rb spec/classes/#{module_name}_spec.rb`
+    `sed -i '' '2,4d' spec/classes/#{module_name}_spec.rb`
     `sed -i '' '/require/G' spec/classes/#{module_name}_spec.rb`
+    `sed -i '' 's/template/#{module_name}/g' spec/classes/#{module_name}_spec.rb`
+
     `git init`
+
     `git add .`
     `git commit -m "Initial repository layout"`
+
     `git remote add origin git@github.com:#{ENV['GITHUB_USERNAME']}/puppet-#{module_name}.git`
     `git push origin master`
   }
