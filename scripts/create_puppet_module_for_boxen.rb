@@ -42,6 +42,7 @@ module_names.split(',').each do |module_name|
     `sed -i '' '3,8d' README.md`
     `sed -i '' '16d' README.md`
     `sed -i '' 's/template/#{module_name}/g' README.md`
+    `sed -i '' 's@/boxen/@/#{ENV['GITHUB_USERNAME']}/@g' README.md`
 
     `sed -i '' '1d' manifests/init.pp`
     `sed -i '' 's/template/#{module_name}/g' manifests/init.pp`
