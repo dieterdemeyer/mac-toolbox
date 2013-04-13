@@ -51,6 +51,7 @@ module_names.split(',').each do |module_name|
     `sed -i '' '2,4d' spec/classes/#{module_name}_spec.rb`
     `sed -i '' '/require/G' spec/classes/#{module_name}_spec.rb`
     `sed -i '' 's/template/#{module_name}/g' spec/classes/#{module_name}_spec.rb`
+    `mv spec/fixtures/modules/template spec/fixtures/modules/#{module_name}`
 
     `git init`
 
